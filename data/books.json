@@ -2,17 +2,41 @@
     {
         "title": "Catch 22",
         "author": "Joseph Heller",
-        "year_published": "1953"
-    },
-    {
-        "title": "The Martian Chronicles",
-        "author": "Ray Bradbury",
-        "year_published": "1949"
+        "number_of_pages": "text",
+        "isbn": "text",
+        "year_published": "1953",
+        "genre": "text",
+        "summary": "Summary of Catch goes here",
+        "mediaUrl": "text"
     },
     {
         "title": "The Great Gatsby",
-        "author": "F Scott Fitzgerald",
-        "year_published": "1953"
+        "author": "Joseph Heller",
+        "number_of_pages": "text",
+        "isbn": "text",
+        "year_published": "1953",
+        "genre": "text",
+        "summary": "The summary goes here",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "War and Peace",
+        "author": "Joseph Heller",
+        "number_of_pages": "text",
+        "isbn": "text",
+        "year_published": "1953",
+        "genre": "text",
+        "summary": "text",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "Dune",
+        "author": "Joseph Heller",
+        "number_of_pages": "text",
+        "isbn": "text",
+        "year_published": "1953",
+        "genre": "text",
+        "summary": "text",
+        "mediaUrl": "text"
     }
-
 ]

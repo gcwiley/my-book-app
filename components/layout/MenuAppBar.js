@@ -1,108 +1,83 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary'
-import HomeIcon from '@material-ui/icons/Home';
-import AddIcon from '@material-ui/icons/Add';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-
-import { makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    button: {
-        margin: theme.spacing(1)
-    },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
 export default function MenuAppBar() {
+  const classes = useStyles();
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-    const user = false;
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const classes = useStyles();
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <LocalLibraryIcon />
-                    </IconButton>
-
-                    <Typography variant="h6" className={classes.title}>
-                        My Book App
-                    </Typography>
-
-                    {/* HOME PAGE */}
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<HomeIcon />}
-                        href="/"
-                    >
-                    HOME PAGE
-                    </Button>
-
-                    {/* CREATE BOOK */}
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<AddIcon />}
-                        href="/create"
-                    >
-                    ADD A BOOK
-                    </Button>
-
-                    {/* ACCOUNT PAGE */}
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<AddIcon />}
-                        href="/account"
-                    >
-                    MY ACCOUNT
-                    </Button>
-
-                    {/* LOG IN */}
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<LockOpenIcon />}
-                        href="/signin"
-                    >
-                    LOG IN
-                    </Button>
-
-                    {/* SIGN UP */}
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<PersonAddIcon />}
-                        href="/signup"
-                    >
-                    SIGN UP
-                    </Button>
-
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            My Book Library
+          </Typography>
+          {auth && (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
