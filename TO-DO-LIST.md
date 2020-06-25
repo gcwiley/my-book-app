@@ -2,3 +2,10 @@
 
 # fix next.config file for gitignore
 
+# fix code in [id] file
+
+# add timestamp to Book Model file
+
+# nav links for getting around
+
+# user model finish 

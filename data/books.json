@@ -2,41 +2,21 @@
     {
         "title": "Catch 22",
         "author": "Joseph Heller",
-        "number_of_pages": "text",
-        "isbn": "text",
-        "year_published": "1953",
-        "genre": "text",
+        "number_of_pages": 523,
+        "isbn": 9781451621174,
+        "year_published": 1952,
+        "genre": "Fiction",
         "summary": "Summary of Catch goes here",
         "mediaUrl": "text"
     },
     {
         "title": "The Great Gatsby",
-        "author": "Joseph Heller",
-        "number_of_pages": "text",
-        "isbn": "text",
-        "year_published": "1953",
-        "genre": "text",
+        "author": "F. Scott Fitzgerald",
+        "number_of_pages": 180,
+        "isbn": 9780743273565,
+        "year_published": 1935,
+        "genre": "Fiction",
         "summary": "The summary goes here",
-        "mediaUrl": "text"
-    },
-    {
-        "title": "War and Peace",
-        "author": "Joseph Heller",
-        "number_of_pages": "text",
-        "isbn": "text",
-        "year_published": "1953",
-        "genre": "text",
-        "summary": "text",
-        "mediaUrl": "text"
-    },
-    {
-        "title": "Dune",
-        "author": "Joseph Heller",
-        "number_of_pages": "text",
-        "isbn": "text",
-        "year_published": "1953",
-        "genre": "text",
-        "summary": "text",
         "mediaUrl": "text"
     }
 ]
