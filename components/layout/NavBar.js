@@ -1,30 +1,28 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-export default function BasicButtonGroup() {
-  const classes = useStyles();
-
+export default function NavBar() {
   return (
-    <div className={classes.root}>
-      <ButtonGroup color="primary" aria-label="outlined primary button group">
-        <Button>Home</Button>
-        <Button>Sign In</Button>
-        <Button>Sign Up</Button>
-        <Button>About</Button>
-      </ButtonGroup>
-    </div>
-  );
+    <ul>
+      <li>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/signin">
+          <a>Sign In</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/signup">
+          <a>Sign Up</a>
+        </Link>
+      </li>
+    </ul>
+  )
 }

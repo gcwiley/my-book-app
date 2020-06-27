@@ -1,11 +1,5 @@
-# create sign in and sign up pages with Material UI code for each.
+3. fix code in [id] file
 
-# fix next.config file for gitignore
+4. add timestamp to Book Model file
 
-# fix code in [id] file
-
-# add timestamp to Book Model file
-
-# nav links for getting around
-
-# user model finish 
+6. user model finish 
