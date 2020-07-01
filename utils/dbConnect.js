@@ -1,7 +1,7 @@
 // This is a database connection function
-import mongoose, { connection } from 'mongoose';
+import mongoose from 'mongoose';
 
-const connectionn = {} // creating connection object
+const connection = {} // creating connection object
 
 async function dbConnect() {
     // check if we have a connection to our database

@@ -4,24 +4,19 @@ export default function NavBar() {
   return (
     <ul>
       <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
+        <Link href="/"><a>Home</a></Link>
       </li>
       <li>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
+        <Link href="/create"><a>Add a Book</a></Link>
       </li>
       <li>
-        <Link href="/signin">
-          <a>Sign In</a>
-        </Link>
+        <Link href="/about"><a>About</a></Link>
       </li>
       <li>
-        <Link href="/signup">
-          <a>Sign Up</a>
-        </Link>
+        <Link href="/signin"><a>Sign In</a></Link>
+      </li>
+      <li>
+        <Link href="/signup"><a>Sign Up</a></Link>
       </li>
     </ul>
   )

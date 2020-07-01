@@ -1,5 +1,5 @@
 # My Book Library
-My Book Library is a web application that allows users to add book records to a Mongo database.
+My Book Library is a simple web application that allows users to create and delete thier favorite books to a Mongo database.
 
 The web application uses React, NextJS, Mongoose, MongoDB and Material UI.
 
