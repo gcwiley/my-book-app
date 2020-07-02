@@ -2,18 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-
+// Material UI Components
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import theme from '../theme/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-
+// Layout Components
 import MenuAppBar from '../components/layout/MenuAppBar';
-import NavBar from '../components/layout/NavBar';
+// import NavBar from '../components/layout/NavBar';
 
 export default function MyApp(props) {
+  
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -34,10 +35,7 @@ export default function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <MenuAppBar />
-        <Container>
-          <NavBar />
           <Component {...pageProps} />
-        </Container>
       </ThemeProvider>
     </React.Fragment>
   );

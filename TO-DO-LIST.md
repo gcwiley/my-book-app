@@ -8,8 +8,6 @@
 
 5. test delete dialog model in testing folder
 
-6. change app icon to book icon
-
-7. Add About this App Page
+7. Add About Information to the About Page
 
 

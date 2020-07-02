@@ -9,7 +9,7 @@ export default function BookPage ({ book }) {
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Published: {book.year_published}</p>
-            <p>Page count: {book.number_pages}</p>
+            <p>Page count: {book.number_of_pages}</p>
             <p>ISBN: {book.isbn}</p>
             <p>Genre: {book.genre}</p>
             <p>Summary: {book.summary}</p>

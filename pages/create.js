@@ -1,5 +1,10 @@
+import NavBar from '../test/NavBar';
+
 export default function About() {
     return (
-    <div>Add a New Book Page</div>
+        <>
+        <NavBar />
+        <h1>This is the add new book page.</h1>
+        </>
     )
 }
