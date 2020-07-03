@@ -1,6 +1,9 @@
+
+// Material UI Components
 import Container from '@material-ui/core/Container'
 
-import NavBar from '../test/NavBar';
+// Layout Components
+import NavBar from '../components/layout/NavBar';
 
 export default function About() {
     return (

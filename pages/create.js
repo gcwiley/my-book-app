@@ -1,10 +1,18 @@
-import NavBar from '../test/NavBar';
+
+// Material UI
+import Container from '@material-ui/core/Container';
+
+// Layout Components
+import NavBar from '../components/layout/NavBar';
+import BookForm from '../components/Books/BookForm';
 
 export default function About() {
     return (
         <>
-        <NavBar />
-        <h1>This is the add new book page.</h1>
+        <Container>
+           <NavBar />
+            <BookForm />
+        </Container>
         </>
-    )
+    );
 }
