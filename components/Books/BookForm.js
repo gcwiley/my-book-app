@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
 import catchErrors from '../../utils/catchErrors';
@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
-    submit: {
-        margin: theme.spacing(3, 0, 2)
+    button: {
+        marginTop: theme.spacing(2)
     }
 }));
 
@@ -42,6 +42,9 @@ export default function BookForm() {
     const [ error, setError ] = useState('');
 
     // use effect goes here
+    useEffect(() => {
+        const isBook = Object.values(book)
+    }, [])
 
     // Changes State
     function handleChange(event) {
@@ -87,15 +90,12 @@ export default function BookForm() {
     }
 
     return (
-        <Container component="main" maxWidth="md">
-            <div className={classes.paper}>
-
-                <Typography component="h1" variant="h5">
+            <>
+                <Typography variant="h4" component="h1" gutterBottom >
                     Add a New Book
                 </Typography>
 
                 <form
-                    className={classes.form}
                     noValidate
                     onSubmit={handleSubmit}
                 >
@@ -142,6 +142,7 @@ export default function BookForm() {
                                 id="isbn"
                                 label="ISBN"
                                 autoFocus
+                                helperText="Must be a 10 digit number"
                                 value={book.isbn}
                                 onChange={handleChange}
                             />
@@ -177,19 +178,50 @@ export default function BookForm() {
                             />
                         </Grid>
 
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                autoComplete="genre"
+                                name="genre"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="genre"
+                                label="Genre"
+                                autoFocus
+                                value={book.genre}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} lg={12}>
+                            <TextField
+                                autoComplete="summary"
+                                name="summary"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="summary"
+                                label="Book Summary"
+                                multiline
+                                rows={5}
+                                autoFocus
+                                value={book.summary}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+
                     </Grid>
 
                     <Button
                         type="submit"
-                        variant="outlined"
+                        variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        className={classes.button}
                     >
                         Submit
                     </Button>
                 </form>
 
-            </div>
-        </Container>
+            </>
     );
 }

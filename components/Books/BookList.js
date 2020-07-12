@@ -1,12 +1,13 @@
 import Link from 'next/link';
 
 // Material UI Components
-import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import { makeStyles, Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+
+import { makeStyles } from '@material-ui/core';
 
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
@@ -15,10 +16,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        margin: theme.spacing(3)
+        marginTop: theme.spacing(3)
     }
 }));
 
@@ -28,12 +26,14 @@ export default function BookList({ books }) {
 
     return (
         <>
-            <h1>My Books</h1>
+            <Typography variant="h4">
+                My Books
+            </Typography>
             
             {books.map((book) => (
                 <div key={book._id}>
 
-                <Card className={classes.card}>
+                <Card variant="outlined" className={classes.card}>
 
                     <CardContent>
 
@@ -41,8 +41,8 @@ export default function BookList({ books }) {
                             {book.title}
                         </Typography>
 
-                        <Typography>
-                            {book.author}
+                        <Typography color="primary">
+                            By {book.author}
                         </Typography> 
 
                     </CardContent>

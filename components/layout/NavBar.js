@@ -44,7 +44,7 @@ export default function NavBar() {
                     className={classes.button}
                     startIcon={<AddBoxIcon />}
                 >
-                    Add Book
+                    Add a Book
                 </Button>
             </Link> 
 

@@ -1,4 +1,3 @@
-
 // Material UI
 import Container from '@material-ui/core/Container';
 
@@ -9,8 +8,8 @@ import BookForm from '../components/Books/BookForm';
 export default function About() {
     return (
         <>
-        <Container>
-           <NavBar />
+        <Container maxWidth="md">
+            <NavBar />
             <BookForm />
         </Container>
         </>

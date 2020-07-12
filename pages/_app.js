@@ -11,7 +11,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 // Layout Components
 import MenuAppBar from '../components/layout/MenuAppBar';
-// import NavBar from '../components/layout/NavBar';
+import Copyright from '../components/layout/Copyright';
 
 export default function MyApp(props) {
   
@@ -36,6 +36,7 @@ export default function MyApp(props) {
         <CssBaseline />
         <MenuAppBar />
           <Component {...pageProps} />
+        <Copyright />
       </ThemeProvider>
     </React.Fragment>
   );
