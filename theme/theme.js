@@ -4,6 +4,11 @@ import { blue } from '@material-ui/core/colors';
 
 // Create a custom theme for this app.
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans, sans-serif;'
+    ]
+  },
   palette: {
     primary: {
       main: blue.A700,

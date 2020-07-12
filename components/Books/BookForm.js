@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import baseUrl from '../../utils/baseUrl';
+import catchErrors from '../../utils/catchErrors';
 
-// Material UI
+// Material UI Components
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -11,8 +13,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
-
-}))
+    submit: {
+        margin: theme.spacing(3, 0, 2)
+    }
+}));
 
 const initialBookForm = {
     title: "",
@@ -21,39 +25,65 @@ const initialBookForm = {
     isdb: "",
     year_published: "",
     genre: "",
-    summary: ""
+    summary: "",
+    media: ""
 }
 
 export default function BookForm() {
 
     const classes = useStyles()
 
-    const [form, setForm ] = useState(initialBookForm)
+    // Manage State Here
+    const [ book, setBook ] = useState(initialBookForm);
+    const [ mediaPreview, setMediaPreview ] = useState('');
+    const [ success, setSuccess ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
+    const [ disabled, setDisabled ] = useState(true);
+    const [ error, setError ] = useState('');
+
+    // use effect goes here
 
     // Changes State
-    const handleChange = event => {
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value
-        })
+    function handleChange(event) {
+        const { name, value, files } = event.target
+        if (name === 'media') {
+            setBook(prevState => ({ ...prevState, media: files[0] }))
+            setMediaPreview(window.URL.createObjectURL(files[0]))
+        } else {
+            setBook((prevState) => ({ ...prevState, [name]: value }))
+        }
     }
 
-    const { title, author, isbn, number_of_pages } = form;
+    // Uploads cover image to cloudinary
+    async function handleImageUpload() {
+        const data = new FormData()
+        data.append('file', book.media)
+        data.append('upload_preset', 'reactreserve')
+        data.append('cloud_name', 'dnc06uisc')
+        const response = await axios.post(process.env.CLOUDINARY_URL, data) // takes two arguments
+        const mediaUrl = response.data.url
+        return mediaUrl
+    }
 
-    const handleSubmit = event => {
-        event.preventDefault()
-        axios({
-            method: "POST",
-            url: '/books',
-            data: { title, author, isbn, number_of_pages }
-        })
-        .then(response => {
-            console.log('Successfully added book', response)
-            setForm(initialFormState)
-        })
-        .catch(error => {
-            console.log('ERROR', error.response.data)
-        })
+
+    // submits book data to database
+    async function handleSubmit(event) {
+        try {
+            event.preventDefault();
+            setLoading(true);
+            setError('');
+            const mediaUrl = await handleImageUpload()
+            const url = `${baseUrl}/api/book`
+            const payload = { title, author, number_of_pages, isbn, year_published, genre, summary, mediaUrl }
+            const response = await axios.post(url, payload);
+            console.error({ response })
+            setBook(initialBookForm); // resets book form
+            setSuccess(ture)
+        } catch(error) {
+            catchErrors(errors, setError)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -82,7 +112,7 @@ export default function BookForm() {
                                 id="title"
                                 label="Title"
                                 autoFocus
-                                value={form.title}
+                                value={book.title}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -97,7 +127,7 @@ export default function BookForm() {
                                 id="author"
                                 label="Author"
                                 autoFocus
-                                value={form.title}
+                                value={book.author}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -112,7 +142,7 @@ export default function BookForm() {
                                 id="isbn"
                                 label="ISBN"
                                 autoFocus
-                                value={form.title}
+                                value={book.isbn}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -127,7 +157,7 @@ export default function BookForm() {
                                 id="number_of_pages"
                                 label="Number of Pages"
                                 autoFocus
-                                value={form.title}
+                                value={book.number_of_pages}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -142,7 +172,7 @@ export default function BookForm() {
                                 id="year_published"
                                 label="Year Published"
                                 autoFocus
-                                value={form.title}
+                                value={book.year_published}
                                 onChange={handleChange}
                             />
                         </Grid>
