@@ -8,10 +8,6 @@
 
 5. Add About Information to the About Page - create change Log JSON file
 
-6. Add Open Sans Font
-
-7. Add Nav Bar to individual book pages
-
 8. Select text field for Book genre in book form
 
 

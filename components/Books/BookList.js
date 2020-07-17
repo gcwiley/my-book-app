@@ -52,7 +52,7 @@ export default function BookList({ books }) {
                         <Link href="/[id]" as={`/${book._id}`} passHref>
                             <Button
                                 size="small"
-                                color="primary"
+                                color="error"
                                 component="a"
                                 variant="outlined"
                             >
