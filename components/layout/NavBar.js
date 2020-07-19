@@ -8,6 +8,8 @@ import InfoIcon from '@material-ui/icons/Info';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+// Add colors to different buttons
+
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
         marginLeft: theme.spacing(0),
     },
+    newBookButton: {
+        color: theme.palette.error.dark,
+    }
   }));
 
 export default function NavBar() {
@@ -44,7 +49,18 @@ export default function NavBar() {
                     className={classes.button}
                     startIcon={<AddBoxIcon />}
                 >
-                    Add a Book
+                    Add a Book (version 1)
+                </Button>
+            </Link> 
+
+            <Link href="/new" passHref>
+                <Button 
+                    variant="outlined"
+                    className={classes.newBookButton}
+                    component="a"
+                    startIcon={<AddBoxIcon />}
+                >
+                    Add a Book (version 2)
                 </Button>
             </Link> 
 

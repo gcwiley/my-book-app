@@ -39,14 +39,18 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static" color="primary">
         <Toolbar>
+
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <LocalLibraryIcon />
           </IconButton>
+
           <Typography variant="h6" className={classes.title}>
             My Book Library
           </Typography>
+          
           {auth && (
             <div>
+
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -56,6 +60,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -74,6 +79,7 @@ export default function MenuAppBar() {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
+              
             </div>
           )}
         </Toolbar>

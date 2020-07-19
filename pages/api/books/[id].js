@@ -1,43 +1,56 @@
 import dbConnect from '../../../utils/dbConnect';
 import Book from '../../../models/Book';
 
-// switch statement within exported function
+export default async function handler(req, res) {
+    const {
+        query: { id },
+        method,
+    } = req
 
-export default async (req, res) => {
-    switch (req.method) {
-        case "GET":
-            await handleGetRequest(req, res);
-            break;
-        case "POST":
-            await handlePostRequest(req, res)
-            break;
-        case "DELETE":
-            await handleDeleteRequest(req, res)
-        default:
-            res.status(405).send(`Method ${req.method} not allowed`);
-            break;
+    await dbConnect()
+
+    switch (method) {
+        case 'GET':
+            try {
+                const book = await Book.findById(id)
+                if (!book) {
+                    return res.status(400).json({ success: false })
+                }
+                res.status(200).json({ success: true, data: book })
+            } catch (error) {
+                res.status(400).json({ success: false })
+            }
+            break
+
+            case 'PUT': 
+                try {
+                    const book = await Book.findByIdAndUpdate(id, req.body, {
+                        new: true,
+                        runValidators: true
+                    })
+                    if (!book) {
+                        return res.status(400).json({ success: false })
+                    }
+                    res.status(200).json({ success: true, data: book })
+                } catch (error) {
+                    res.status(400).json({ success: false })
+                }
+                break
+
+            case 'DELETE':
+                try {
+                    const deletedBook = await Book.deleteOne({ _id: id })
+                    if (!deletedBook) {
+                        return res.status(400).json({ success: false })
+                    }
+                    res.status(200).json({ success: true, data: {} })
+                } catch (error) {
+                    res.status(400).json({ success: false })
+                }
+                break
+            
+            default:
+                res.status(400).json({ success: false })
+            break
     }
-}
-
-
-async function handlePostRequest(req, res) {
-
-    const { name, price, description, mediaUrl } = req.body
-    
-    try {
-        if (!name || !price || !description || !mediaUrl ) {
-            return res.status(422).send("Book Form is missing one or more fields")
-        }
-
-
-    } catch(error) {
-        console.error(error)
-        res.status(500).send("Server error in creating product")
-    }
-}
-
-async function handleDeleteRequest(req, res) {
-    const { _id } = req.query;
-    await Book.findByIdAndDelete({ _id })
-    res.status(204).json({})
 }

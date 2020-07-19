@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     await dbConnect()
 
     switch (method) {
+        
         case 'GET':
             try {
                 const books = await Book.find({})
@@ -15,6 +16,7 @@ export default async function handler(req, res) {
                 res.status(400).json({ success: false })
             }
             break
+
         case 'POST':
             try {
                 const book = await Book.create(
@@ -25,6 +27,7 @@ export default async function handler(req, res) {
                 res.status(400).json({ success: false })
             }
             break
+
         default:
             res.status(400).json({ success: false })
             break

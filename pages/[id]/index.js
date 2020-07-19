@@ -1,33 +1,64 @@
+import React, { useState } from 'react';
 import dbConnect from '../../utils/dbConnect';
 import Book from '../../models/Book';
 
+// Import Axios
+import axios from 'axios';
+
+import { useRouter } from 'next/router';
+
 // import Layout Components
 import NavBar from '../../components/layout/NavBar';
-import DeleteBook from '../../components/Books/DeleteBook';
 
 // Material UI Components
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+// CSS STYLES GO HERE
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(3), // fix this
         padding: theme.spacing(3)
+    },
+    deleteButton: {
+        marginTop: theme.spacing(8),
+        backgroundColor: theme.palette.error.dark,
     }
 }))
 
-
-
 export default function BookPage ({ book }) {
 
+    // CSS CLASSES - FIX THIS!
     const classes = useStyles()
 
+    // NEXT ROUTER SETUP
+    const router = useRouter();
+
+    // MANAGE STATE HERE
+    const [ message, setMessage ] = useState('')
+
+    // Deletes the Book!
+    const handleDelete = async () => {
+
+        const bookID = router.query.id
+
+        try {
+            await axios(`/api/books/${bookID}`, {
+                method: 'DELETE',
+            })
+            router.push('/')
+        } catch (error) {
+            setMessage('Failed to delete this book')
+        }
+    }
+
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" key={book._id}>
             <NavBar />
             <Paper variant="outlined" className={classes.paper}>
 
@@ -55,9 +86,20 @@ export default function BookPage ({ book }) {
                     Summary: {book.summary}
                 </Typography>
 
-                <DeleteBook />
-            
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    className={classes.deleteButton}
+                    onClick={handleDelete}
+                >
+                    Delete
+                </Button>
+
             </Paper>
+
+            {message && <p>{message}</p>}
+
         </Container>  
     )
 }

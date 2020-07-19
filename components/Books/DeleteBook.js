@@ -1,27 +1,21 @@
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// DELETE BOOK COMPONENT
 
-import { makeStyles } from '@material-ui/core/styles';
-
-// CSS Styles
-const useStyles = makeStyles((theme) => ({
-    button: {
-        marginTop: theme.spacing(4),
-        color: theme.palette.error.dark
-    },
-}));
-
-export default function DeleteBook() {
+function DeleteBook({ book }) {
 
     const classes = useStyles();
 
+    const router = useRouter()
+
+    async function handleDelete() {
+        const url = `${baseUrl}/api/books/[id]`
+        const payload = { params: { _id }}
+        await axios.delete(url, payload)
+        setOpen(false);
+        router.push('/') 
+    }
+
     // Manages State
-    const [ open, setOpen ] = React.useState(false);
+    const [ open, setOpen ] = React.useState(false)
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -32,11 +26,11 @@ export default function DeleteBook() {
     }
 
     return (
-        <div>
+        <>
             <Button
-                variant="outlined"
+                className={classes.deleteButton}
+                variant="contained"
                 color="primary"
-                className={classes.button}
                 startIcon={<DeleteIcon />}
                 onClick={handleClickOpen}
                 size="small"
@@ -59,16 +53,17 @@ export default function DeleteBook() {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button 
-                        onClick={handleClose} 
-                        variant="outlined" 
+
+                    <Button
+                        onClick={handleClose}
+                        variant="outlined"
                     >
                         Cancel
                     </Button>
-                    <Button 
-                        onClick={handleClose} 
+
+                    <Button
+                        onClick={handleDelete}
                         variant="contained"
-                        color="secondary"
                         disableElevation
                     >
                         Delete
@@ -76,6 +71,6 @@ export default function DeleteBook() {
                 </DialogActions>
 
             </Dialog>
-        </div>
+        </>
     );
 }

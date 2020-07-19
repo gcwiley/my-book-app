@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
-import catchErrors from '../../utils/catchErrors';
 
 // Material UI Components
 import Typography from '@material-ui/core/Typography';
@@ -18,15 +17,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// Initial Book Form State
 const initialBookForm = {
     title: "",
     author: "",
     number_of_pages: "",
-    isdb: "",
+    isbn: "",
     year_published: "",
     genre: "",
-    summary: "",
-    media: ""
+    summary: ""
 }
 
 export default function BookForm() {
@@ -41,7 +40,7 @@ export default function BookForm() {
     const [ disabled, setDisabled ] = useState(true);
     const [ error, setError ] = useState('');
 
-    // use effect goes here
+    // useEffect goes here
     useEffect(() => {
         const isBook = Object.values(book)
     }, [])
@@ -67,21 +66,17 @@ export default function BookForm() {
         const mediaUrl = response.data.url
         return mediaUrl
     }
-
-
+    
     // submits book data to database
     async function handleSubmit(event) {
         try {
             event.preventDefault();
-            setLoading(true);
-            setError('');
-            const mediaUrl = await handleImageUpload()
-            const url = `${baseUrl}/api/book`
-            const payload = { title, author, number_of_pages, isbn, year_published, genre, summary, mediaUrl }
+            const url = `${baseUrl}/api/books`
+            const payload = { title, author, number_of_pages, isbn, year_published, genre, summary }
             const response = await axios.post(url, payload);
             console.error({ response })
             setBook(initialBookForm); // resets book form
-            setSuccess(ture)
+            setSuccess(true)
         } catch(error) {
             catchErrors(errors, setError)
         } finally {
@@ -166,12 +161,13 @@ export default function BookForm() {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="year_published"
+                                type="date"
                                 name="year_published"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="year_published"
-                                label="Year Published"
+                                // label="Year Published"
                                 autoFocus
                                 value={book.year_published}
                                 onChange={handleChange}
@@ -182,6 +178,7 @@ export default function BookForm() {
                             <TextField
                                 autoComplete="genre"
                                 name="genre"
+                                select
                                 variant="outlined"
                                 required
                                 fullWidth
