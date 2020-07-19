@@ -1,3 +1,5 @@
+// DELETE THIS CODE AND REPLACE WITH REACT RESERVE CODE!
+
 import dbConnect from '../../../utils/dbConnect';
 import Book from '../../../models/Book';
 

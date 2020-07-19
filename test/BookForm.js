@@ -4,8 +4,20 @@ import { useRouter } from 'next/router';
 // Material UI Components
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { Typography, Button } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/core/styles';
+
+// CSS Styles
+const useStyles = makeStyles((theme) => ({
+    button: {
+        marginTop: theme.spacing(2)
+    }
+}));
 
 const BookForm = ({ bookForm }) => {
+
+    const classes = useStyles()
 
     const router = useRouter()
 
@@ -14,6 +26,7 @@ const BookForm = ({ bookForm }) => {
     const [ errors, setErrors ] = useState({})
     const [ message, setMessage ] = useState('')
 
+    // Manages State
     const [ form, setForm ] = useState({
         title: bookForm.title,
         author: bookForm.author,
@@ -98,43 +111,64 @@ const BookForm = ({ bookForm }) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
 
-                <Grid item>
-                    <TextField
-                        type="text"
-                        label="Title"
-                        variant="outlined"
-                        onChange={handleChange}
-                    />
+            <Typography variant="h4" component="h1" gutterBottom >
+                Add a New Book
+            </Typography>
+
+            <form
+                noValidate 
+                onSubmit={handleSubmit}
+            >
+
+                <Grid container spacing={2}>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            autoComplete="title"
+                            name="title"
+                            variant="outlined"
+                            required
+                            id="title"
+                            label="Title"
+                            autoFocus
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            type="text"
+                            label="Author"
+                            variant="outlined"
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            type="text"
+                            label="ISBN"
+                            variant="outlined"
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            type="date"
+                            variant="outlined"
+                        />
+                    </Grid>
+
                 </Grid>
 
-                <Grid item>
-                    <TextField
-                        type="text"
-                        label="Author"
-                        variant="outlined"
-                    />
-                </Grid>
-
-                <Grid item>
-                    <TextField
-                        type="text"
-                        label="ISBN"
-                        variant="outlined"
-                    />
-                </Grid>
-
-                <Grid item>
-                    <TextField
-                        type="date"
-                        variant="outlined"
-                    />
-                </Grid>
-
-                <button type="submit">
+                <Button 
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                >
                     Submit
-                </button>
+                </Button>
 
                 <p>{message}</p>
 
