@@ -49,18 +49,7 @@ export default function NavBar() {
                     className={classes.button}
                     startIcon={<AddBoxIcon />}
                 >
-                    Add a Book (version 1)
-                </Button>
-            </Link> 
-
-            <Link href="/new" passHref>
-                <Button 
-                    variant="outlined"
-                    className={classes.newBookButton}
-                    component="a"
-                    startIcon={<AddBoxIcon />}
-                >
-                    Add a Book (version 2)
+                    Add a Book
                 </Button>
             </Link> 
 
