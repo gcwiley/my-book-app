@@ -6,7 +6,7 @@
         "isbn": 9781451621174,
         "year_published": 1952,
         "genre": "Fiction",
-        "summary": "Summary of Catch goes here",
+        "summary": "Catch-22 is a satirical war novel by American author Joseph Heller. He began writing it in 1953; the novel was first published in 1961.",
         "mediaUrl": "text"
     },
     {
@@ -16,7 +16,47 @@
         "isbn": 9780743273565,
         "year_published": 1935,
         "genre": "Fiction",
-        "summary": "The summary goes here",
+        "summary": "The Great Gatsby is a 1925 novel written by American author F. Scott Fitzgerald that follows a cast of characters living in the fictional towns of West Egg and East Egg on prosperous Long Island in the summer of 1922. Many literary critics consider The Great Gatsby to be one of the greatest novels ever written.",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "Moby Dick or The Whale",
+        "author": "Herman Melville",
+        "number_of_pages": 180,
+        "isbn": 9780743273565,
+        "year_published": 1851,
+        "genre": "Fiction",
+        "summary": "Moby-Dick; or, The Whale is an 1851 novel by American writer Herman Melville. The book is the sailor Ishmael's narrative of the obsessive quest of Ahab, captain of the whaling ship Pequod, for revenge on Moby Dick, the giant white sperm whale that on the ship's previous voyage bit off Ahab's leg at the knee.",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "Fahrenheit 451",
+        "author": "Ray Bradbury",
+        "number_of_pages": 256,
+        "isbn": 9780743273565,
+        "year_published": 1953,
+        "genre": "Fiction",
+        "summary": "Fahrenheit 451 is a dystopian novel by American writer Ray Bradbury, first published in 1953. Often regarded as one of his best works, the novel presents a future American society where books are outlawed and firemen burn any that are found.",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "Nineteen Eighty-Four",
+        "author": "George Orwell",
+        "number_of_pages": 328,
+        "isbn": 9780743273565,
+        "year_published": 1949,
+        "genre": "Fiction",
+        "summary": "Nineteen Eighty-Four: A Novel, often published as 1984, is a dystopian novel by English novelist George Orwell. It was published on 8 June 1949 by Secker & Warburg as Orwell's ninth and final book completed in his lifetime. ",
+        "mediaUrl": "text"
+    },
+    {
+        "title": "Brave New World",
+        "author": "Aldous Huxley",
+        "number_of_pages": 311,
+        "isbn": 9780743273565,
+        "year_published": 1932,
+        "genre": "Fiction",
+        "summary": "Brave New World is a dystopian novel by English author Aldous Huxley, written in 1931 and published in 1932.",
         "mediaUrl": "text"
     }
 ]

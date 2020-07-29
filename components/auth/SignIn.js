@@ -10,9 +10,11 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+// Layout Components
 import Copyright from '../layout/Copyright';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +50,12 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+
+        <form 
+          className={classes.form} 
+          noValidate
+        >
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -60,6 +67,7 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -71,6 +79,7 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
+
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

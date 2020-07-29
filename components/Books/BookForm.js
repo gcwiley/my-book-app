@@ -167,7 +167,7 @@ export default function BookForm() {
                                 required
                                 fullWidth
                                 id="year_published"
-                                // label="Year Published"
+                                label="Year Published"
                                 autoFocus
                                 value={book.year_published}
                                 onChange={handleChange}
