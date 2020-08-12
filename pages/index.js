@@ -1,21 +1,14 @@
 import dbConnect from '../utils/dbConnect';
 import Book from '../models/Book';
 
-// Material UI Components
-import Container from '@material-ui/core/Container'
-
 // Layout Components
-import NavBar from '../components/layout/NavBar';
 import BookList from '../components/Books/BookList';
 
 export default function Home({ books }) {
 
     return (
     <>
-        <Container maxWidth="md">
-            <NavBar />
-            <BookList books={books}/>
-        </Container>
+        <BookList books={books}/>
     </>
     );
 }

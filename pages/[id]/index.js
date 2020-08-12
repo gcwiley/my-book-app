@@ -7,18 +7,12 @@ import axios from 'axios';
 
 import { useRouter } from 'next/router';
 
-// import Layout Components
-import NavBar from '../../components/layout/NavBar';
-
 // Material UI Components
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Paper, Typography, Button } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles';
 
-// CSS STYLES GO HERE
+// CSS STYLES
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(1),
@@ -58,8 +52,6 @@ export default function BookPage ({ book }) {
     }
 
     return (
-        <Container maxWidth="md" key={book._id}>
-            <NavBar />
             <Paper variant="outlined" className={classes.paper}>
 
                 <Typography variant="h2">
@@ -97,10 +89,6 @@ export default function BookPage ({ book }) {
                 </Button>
 
             </Paper>
-
-            {message && <p>{message}</p>}
-
-        </Container>  
     )
 }
 

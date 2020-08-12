@@ -15,6 +15,7 @@ const BookSchema = new mongoose.Schema({
     },
     isbn: {
         type: String,
+        max: 9,
         required: true,
         unique: true
     },
@@ -24,7 +25,8 @@ const BookSchema = new mongoose.Schema({
     },
     genre: {
         type: String,
-        required: true
+        required: true,
+        enum: ['Military']
     },
     summary: {
         type: String,

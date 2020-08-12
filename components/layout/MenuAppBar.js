@@ -1,13 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+
+// MUI Components
+import { Container, AppBar, Toolbar, Typography, IconButton, MenuItem, Menu } from '@material-ui/core';
+
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +37,7 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="primary">
+        <Container maxWidth="md">
         <Toolbar>
 
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -83,6 +83,7 @@ export default function MenuAppBar() {
             </div>
           )}
         </Toolbar>
+      </Container>
       </AppBar>
     </div>
   );

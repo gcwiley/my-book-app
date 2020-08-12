@@ -1,11 +1,7 @@
 import Link from 'next/link';
 
 // Material UI Components
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardActions, CardContent, Button, Typography, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core';
 
@@ -29,43 +25,44 @@ export default function BookList({ books }) {
             <Typography variant="h4">
                 My Books
             </Typography>
-            
-            {books.map((book) => (
-                <div key={book._id}>
 
-                <Card variant="outlined" className={classes.card}>
+            <Grid container spacing={3} justify="center">
 
-                    <CardContent>
+                {books.map((book) => (
+                    <Grid item component={Card} key={book._id}>
 
-                        <Typography variant="h5" component="h2">
-                            {book.title}
-                        </Typography>
+                        <CardContent>
 
-                        <Typography color="primary">
-                            By {book.author}
-                        </Typography> 
+                            <Typography color="primary" variant="h5">
+                                {book.title}
+                            </Typography>
 
-                    </CardContent>
-                    
-                    <CardActions>
+                            <Typography color="secondary">
+                                {book.author}
+                            </Typography>
 
-                        <Link href="/[id]" as={`/${book._id}`} passHref>
-                            <Button
-                                size="small"
-                                color="error"
-                                component="a"
-                                variant="outlined"
-                            >
+                        </CardContent>
+                        
+                        <CardActions>
+
+                            <Link href="/[id]" as={`/${book._id}`} passHref>
+                                <Button
+                                    size="small"
+                                    color="primary"
+                                    component="a"
+                                    variant="outlined"
+                                >
                                 View
-                            </Button>
-                        </Link>
+                                </Button>
+                            </Link>
 
-                    </CardActions>  
+                        </CardActions> 
 
-                </Card>
+                    </Grid>
+                ))}
+
+            </Grid>
             
-                </div>
-            ))}
         </>
     )
 }

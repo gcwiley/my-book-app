@@ -3,10 +3,7 @@ import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
 
 // Material UI Components
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import { Typography, TextField, Button, Grid } from '@material-ui/core/';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -94,7 +91,6 @@ export default function BookForm() {
                     noValidate
                     onSubmit={handleSubmit}
                 >
-
                     <Grid container spacing={2}>
 
                         <Grid item xs={12} sm={6}>
@@ -103,7 +99,6 @@ export default function BookForm() {
                                 name="title"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="title"
                                 label="Title"
                                 autoFocus
@@ -118,7 +113,6 @@ export default function BookForm() {
                                 name="author"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="author"
                                 label="Author"
                                 autoFocus
@@ -133,7 +127,6 @@ export default function BookForm() {
                                 name="isbn"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="isbn"
                                 label="ISBN"
                                 autoFocus
@@ -149,7 +142,6 @@ export default function BookForm() {
                                 name="number_of_pages"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="number_of_pages"
                                 label="Number of Pages"
                                 autoFocus
@@ -165,9 +157,8 @@ export default function BookForm() {
                                 name="year_published"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="year_published"
-                                label="Year Published"
+                                // label="Year Published"
                                 autoFocus
                                 value={book.year_published}
                                 onChange={handleChange}
@@ -178,10 +169,8 @@ export default function BookForm() {
                             <TextField
                                 autoComplete="genre"
                                 name="genre"
-                                select
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="genre"
                                 label="Genre"
                                 autoFocus
@@ -190,13 +179,12 @@ export default function BookForm() {
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={6} lg={12}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="summary"
                                 name="summary"
                                 variant="outlined"
                                 required
-                                fullWidth
                                 id="summary"
                                 label="Book Summary"
                                 multiline
