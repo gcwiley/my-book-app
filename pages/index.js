@@ -2,7 +2,7 @@ import dbConnect from '../utils/dbConnect';
 import Book from '../models/Book';
 
 // Layout Components
-import BookList from '../components/Books/BookList';
+import BookList from '../components/Index/BookList';
 
 export default function Home({ books }) {
 

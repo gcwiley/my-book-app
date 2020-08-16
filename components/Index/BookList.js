@@ -1,6 +1,4 @@
 import Link from 'next/link';
-
-// Material UI Components
 import { Card, CardActions, CardContent, Button, Typography, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core';
@@ -26,7 +24,7 @@ export default function BookList({ books }) {
                 My Books
             </Typography>
 
-            <Grid container spacing={3} justify="center">
+            <Grid container spacing={2}>
 
                 {books.map((book) => (
                     <Grid item component={Card} key={book._id}>
