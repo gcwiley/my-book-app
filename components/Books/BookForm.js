@@ -1,212 +1,183 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import baseUrl from '../../utils/baseUrl';
-
-// Material UI Components
-import { Typography, TextField, Button, Grid } from '@material-ui/core/';
-
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { Typography, TextField, Grid, Paper, Button, makeStyles } from '@material-ui/core';
 
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
-    button: {
-        marginTop: theme.spacing(2)
+    paper: {
+        marginTop: theme.spacing(1),
+        padding: theme.spacing(3),
     }
-}));
+}))
 
-// Initial Book Form State
-const initialBookForm = {
-    title: "",
-    author: "",
-    number_of_pages: "",
-    isbn: "",
-    year_published: "",
-    genre: "",
-    summary: ""
-}
+const INITIAL_BOOK = {
+        title: "",
+        author: "",
+        number_of_pages: "",
+        isbn: "",
+        date_published: "",
+        genre: "",
+        summary: "",
+        book_cover_image: ""
+    }
 
 export default function BookForm() {
 
-    const classes = useStyles()
+    const [ book, setBook ] = useState(INITIAL_BOOK);
+    const [ mediaPreview, setMediaPreview ] = useState('')
 
-    // Manage State Here
-    const [ book, setBook ] = useState(initialBookForm);
-    const [ mediaPreview, setMediaPreview ] = useState('');
-    const [ success, setSuccess ] = useState(false);
-    const [ loading, setLoading ] = useState(false);
-    const [ disabled, setDisabled ] = useState(true);
-    const [ error, setError ] = useState('');
 
-    // useEffect goes here
-    useEffect(() => {
-        const isBook = Object.values(book)
-    }, [])
 
-    // Changes State
     function handleChange(event) {
-        const { name, value, files } = event.target
+        const { name, value, files } = event.target;
         if (name === 'media') {
-            setBook(prevState => ({ ...prevState, media: files[0] }))
+            setBook(prevState => ({ ...prevState, media: files[0] }));
             setMediaPreview(window.URL.createObjectURL(files[0]))
         } else {
-            setBook((prevState) => ({ ...prevState, [name]: value }))
+          setBook((prevState) => ({ ...prevState, [name]: value }));  
         }
     }
 
-    // Uploads cover image to cloudinary
-    async function handleImageUpload() {
-        const data = new FormData()
-        data.append('file', book.media)
-        data.append('upload_preset', 'reactreserve')
-        data.append('cloud_name', 'dnc06uisc')
-        const response = await axios.post(process.env.CLOUDINARY_URL, data) // takes two arguments
-        const mediaUrl = response.data.url
-        return mediaUrl
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log(book)
+        setBook(INITIAL_BOOK)
     }
-    
-    // submits book data to database
-    async function handleSubmit(event) {
-        try {
-            event.preventDefault();
-            const url = `${baseUrl}/api/books`
-            const payload = { title, author, number_of_pages, isbn, year_published, genre, summary }
-            const response = await axios.post(url, payload);
-            console.error({ response })
-            setBook(initialBookForm); // resets book form
-            setSuccess(true)
-        } catch(error) {
-            catchErrors(errors, setError)
-        } finally {
-            setLoading(false)
-        }
-    }
+
+    const classes = useStyles();
 
     return (
-            <>
-                <Typography variant="h4" component="h1" gutterBottom >
-                    Add a New Book
-                </Typography>
 
-                <form
-                    noValidate
-                    onSubmit={handleSubmit}
-                >
-                    <Grid container spacing={2}>
+        <Paper className={classes.paper}>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="title"
-                                name="title"
-                                variant="outlined"
-                                required
-                                id="title"
-                                label="Title"
-                                autoFocus
-                                value={book.title}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+            <Typography variant="h4" gutterBottom>
+                Add a new Book
+            </Typography>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="author"
-                                name="author"
-                                variant="outlined"
-                                required
-                                id="author"
-                                label="Author"
-                                autoFocus
-                                value={book.author}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+            <form onSubmit={handleSubmit}>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="isbn"
-                                name="isbn"
-                                variant="outlined"
-                                required
-                                id="isbn"
-                                label="ISBN"
-                                autoFocus
-                                helperText="Must be a 10 digit number"
-                                value={book.isbn}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+                <Grid container spacing={2}>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="number_of_pages"
-                                name="number_of_pages"
-                                variant="outlined"
-                                required
-                                id="number_of_pages"
-                                label="Number of Pages"
-                                autoFocus
-                                value={book.number_of_pages}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Title"
+                            variant="outlined"
+                            size="small"
+                            type="text"
+                            autoComplete="off"
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="year_published"
-                                type="date"
-                                name="year_published"
-                                variant="outlined"
-                                required
-                                id="year_published"
-                                // label="Year Published"
-                                autoFocus
-                                value={book.year_published}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+                            name="title"
+                            value={book.title}
+                            onChange={handleChange}
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="genre"
-                                name="genre"
-                                variant="outlined"
-                                required
-                                id="genre"
-                                label="Genre"
-                                autoFocus
-                                value={book.genre}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Author"
+                            variant="outlined"
+                            size="small"
+                            type="text"
+                            autoComplete="off"
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="summary"
-                                name="summary"
-                                variant="outlined"
-                                required
-                                id="summary"
-                                label="Book Summary"
-                                multiline
-                                rows={5}
-                                autoFocus
-                                value={book.summary}
-                                onChange={handleChange}
-                            />
-                        </Grid>
+                            name="author"
+                            value={book.author}
+                            onChange={handleChange}
+                        />
+                    </Grid>
 
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Number of Pages"
+                            variant="outlined"
+                            size="small"
+                            type="number"
+
+                            name="number_of_pages"
+                            value={book.number_of_pages}
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="ISBN"
+                            variant="outlined"
+                            size="small"
+                            type="number"
+                            helperText="Must be a 9 digit number"
+
+                            name="isbn"
+                            value={book.isbn}
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            size="small"
+                            type="date"
+
+                            name="date_published"
+                            value={book.date_published}
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Genre"
+                            variant="outlined"
+                            size="small"
+                            type="text"
+                            autoComplete="off"
+
+                            name="genre"
+                            value={book.genre}
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Summary"
+                            variant="outlined"
+                            size="medium"
+                            type="text"
+                            multiline
+                            rows={6}
+
+                            name="summary"
+                            value={book.summary}
+                            onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <img src={mediaPreview} height="300px" />
+
+                    <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            size="medium"
+                            type="file"
+
+                            name="media"
+                            onChange={handleChange}
+                        />
                     </Grid>
 
                     <Button
-                        type="submit"
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
-                        className={classes.button}
+                        type="submit"
                     >
                         Submit
                     </Button>
-                </form>
 
-            </>
-    );
+
+
+                </Grid>
+            </form>
+        </Paper>
+    )
 }

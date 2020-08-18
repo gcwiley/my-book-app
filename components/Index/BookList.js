@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { Card, CardActions, CardContent, Button, Typography, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core';
@@ -10,7 +11,10 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3),
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(3)
+
     }
 }));
 
@@ -27,7 +31,7 @@ export default function BookList({ books }) {
             <Grid container spacing={2}>
 
                 {books.map((book) => (
-                    <Grid item component={Card} key={book._id}>
+                    <Grid item component={Card} key={book._id} className={classes.card}>
 
                         <CardContent>
 
