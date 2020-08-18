@@ -57,81 +57,78 @@ export default function BookForm() {
 
                 <Grid container spacing={2}>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <TextField
                             label="Title"
                             variant="outlined"
                             size="small"
                             type="text"
                             autoComplete="off"
-
+                            fullWidth
                             name="title"
                             value={book.title}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <TextField
                             label="Author"
                             variant="outlined"
                             size="small"
                             type="text"
                             autoComplete="off"
-
+                            fullWidth
                             name="author"
                             value={book.author}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={3}>
                         <TextField
                             label="Number of Pages"
                             variant="outlined"
                             size="small"
                             type="number"
-
                             name="number_of_pages"
                             value={book.number_of_pages}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={3}>
                         <TextField
                             label="ISBN"
                             variant="outlined"
                             size="small"
                             type="number"
                             helperText="Must be a 9 digit number"
-
                             name="isbn"
                             value={book.isbn}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={3}>
                         <TextField
                             variant="outlined"
                             size="small"
                             type="date"
-
                             name="date_published"
+                            helperText="Date Published"
                             value={book.date_published}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={3}>
                         <TextField
                             label="Genre"
                             variant="outlined"
                             size="small"
                             type="text"
                             autoComplete="off"
-
                             name="genre"
                             value={book.genre}
                             onChange={handleChange}
@@ -144,16 +141,19 @@ export default function BookForm() {
                             variant="outlined"
                             size="medium"
                             type="text"
+                            placeholder="Please write a short summary of this book."
                             multiline
                             rows={6}
-
+                            fullWidth
                             name="summary"
                             value={book.summary}
                             onChange={handleChange}
                         />
                     </Grid>
 
-                    <img src={mediaPreview} height="300px" />
+                    <Grid item xs={12}>
+                        <img src={mediaPreview} height="200px" />
+                    </Grid>
 
                     <Grid item xs={12}>
                         <TextField
@@ -166,16 +166,16 @@ export default function BookForm() {
                         />
                     </Grid>
 
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        type="submit"
-                    >
-                        Submit
-                    </Button>
-
-
-
+                    <Grid item>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
+                    </Grid>
+                    
                 </Grid>
             </form>
         </Paper>
