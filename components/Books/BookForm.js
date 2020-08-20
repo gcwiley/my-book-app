@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import baseUrl from '../../utils/baseUrl';
+
 import { Typography, TextField, Grid, Paper, Button, makeStyles } from '@material-ui/core';
 
 // CSS Styles
@@ -17,15 +20,14 @@ const INITIAL_BOOK = {
         date_published: "",
         genre: "",
         summary: "",
-        book_cover_image: ""
+        media: ""
     }
 
 export default function BookForm() {
 
     const [ book, setBook ] = useState(INITIAL_BOOK);
-    const [ mediaPreview, setMediaPreview ] = useState('')
-
-
+    const [ mediaPreview, setMediaPreview ] = useState('');
+    // Set Success State Here
 
     function handleChange(event) {
         const { name, value, files } = event.target;
@@ -33,13 +35,29 @@ export default function BookForm() {
             setBook(prevState => ({ ...prevState, media: files[0] }));
             setMediaPreview(window.URL.createObjectURL(files[0]))
         } else {
-          setBook((prevState) => ({ ...prevState, [name]: value }));  
+          setBook(prevState => ({ ...prevState, [name]: value }));  
         }
     }
 
-    function handleSubmit(event) {
+    async function handleImageUpload() {
+        const data = new FormData()
+        data.append('file', book.media)
+        data.append('upload_preset', 'my-book-library')
+        data.append('cloud_name', 'dnc06uisc')
+        const response = await axios.post(process.env.CLOUDINARY_URL, data)
+        const mediaUrl = response.data.url
+        return mediaUrl;
+    }
+
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log(book)
+        const mediaUrl = await handleImageUpload()
+        console.log({ mediaUrl })
+        const url = `${baseUrl}/api/books`
+        const { title, author, number_of_pages, isbn, date_published, genre, summary } = book;
+        const payload = { title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl }
+        const response = await axios.post(url, payload );
+        console.log({book})
         setBook(INITIAL_BOOK)
     }
 
@@ -47,10 +65,10 @@ export default function BookForm() {
 
     return (
 
-        <Paper className={classes.paper}>
+        <Paper variant="outlined" className={classes.paper}>
 
             <Typography variant="h4" gutterBottom>
-                Add a new Book
+                New Book
             </Typography>
 
             <form onSubmit={handleSubmit}>
@@ -160,8 +178,8 @@ export default function BookForm() {
                             variant="outlined"
                             size="medium"
                             type="file"
-
                             name="media"
+                            helperText="Select Book Cover"
                             onChange={handleChange}
                         />
                     </Grid>
@@ -170,6 +188,8 @@ export default function BookForm() {
                         <Button
                             variant="contained"
                             color="primary"
+                            size="small"
+                            disableElevation
                             type="submit"
                         >
                             Submit

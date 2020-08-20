@@ -14,7 +14,7 @@ export default function BookDetails({ book }) {
             </Typography>
 
             <Typography variant="body2">
-                Published: {book.year_published}
+                Published: {book.date_published}
             </Typography>
 
             <Typography variant="body2">

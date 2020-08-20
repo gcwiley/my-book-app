@@ -19,14 +19,13 @@ const BookSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    year_published: {
-        type: Number,
+    date_published: {
+        type: Date,
         required: true
     },
     genre: {
         type: String,
         required: true,
-        enum: ['Military']
     },
     summary: {
         type: String,

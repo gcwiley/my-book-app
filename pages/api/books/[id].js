@@ -3,8 +3,6 @@ import dbConnect from '../../../utils/dbConnect';
 
 dbConnect();
 
-// swith statement with exported function
-
 export default async (req, res) => {
     switch (req.method) {
         case 'GET':
@@ -22,18 +20,24 @@ export default async (req, res) => {
     }
 }
 
-async function handleGetRequest(req, res) {
-
-}
+async function handleGetRequest(req, res) {}
 
 async function handlePostRequest(req, res) {
-
-    const { name, price, description, mediaUrl } = req.body
-    try {
-
-    } catch(error) {
-        
+    const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body
+    if (!title || !author || !number_of_pages || !isbn || !date_published || !genre || !summary || !mediaUrl) {
+        return res.status(422).send("Book missing one or more fields")
     }
+    const book = await new Book({
+        title,
+        author,
+        number_of_pages,
+        isbn,
+        date_published,
+        genre,
+        summary,
+        mediaUrl
+    }).save()
+    res.status(201).json(book)
 }
 
 async function handleDeleteRequest(req, res) {
