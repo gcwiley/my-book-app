@@ -20,7 +20,9 @@ export default async (req, res) => {
     }
 }
 
-async function handleGetRequest(req, res) {}
+async function handleGetRequest(req, res) {
+    
+}
 
 async function handlePostRequest(req, res) {
     const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body

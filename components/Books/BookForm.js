@@ -3,7 +3,6 @@ import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
 // import catchErrors from '../../utils/catchErrors';
 
-// MUI Components
 import { Typography, TextField, Grid, Paper, Button, Backdrop, CircularProgress, Snackbar, makeStyles } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 

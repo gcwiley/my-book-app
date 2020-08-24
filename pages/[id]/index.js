@@ -27,6 +27,7 @@ export default function BookPage ({ book }) {
 }
 
 export async function getServerSideProps({ params }) {
+    
     await dbConnect()
 
     const book = await Book.findById(params.id).lean()

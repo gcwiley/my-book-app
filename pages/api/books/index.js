@@ -22,14 +22,14 @@ export default async (req, res) => {
 
 async function handleGetRequest(req, res) {
     const { _id } = req.query
-    const book = await Book.findOne({ _id }) // find by Id
+    const book = await Book.findById({ _id }) // find by Id
     res.status(200).json(book)
 }
 
 async function handlePostRequest(req, res) {
-    const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body
-
     try {
+        console.log(req.body)
+        const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body
         if (!title || !author || !number_of_pages || !isbn || !date_published || !genre || !summary || !mediaUrl) {
         return res.status(422).send("Book missing one or more fields")
         }
