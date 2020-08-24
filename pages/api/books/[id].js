@@ -1,7 +1,7 @@
-import Book from '../../../models/Book';
 import dbConnect from '../../../utils/dbConnect';
+import Book from '../../../models/Book';
 
-dbConnect();
+await dbConnect();
 
 export default async (req, res) => {
     switch (req.method) {

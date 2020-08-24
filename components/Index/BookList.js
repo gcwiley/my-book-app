@@ -31,7 +31,7 @@ export default function BookList({ books }) {
             <Grid container spacing={2}>
 
                 {books.map((book) => (
-                    <Grid item component={Card} key={book._id} className={classes.card}>
+                    <Grid item component={Card} key={book._id} className={classes.card} square>
 
                         <CardContent>
 

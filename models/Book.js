@@ -14,10 +14,9 @@ const BookSchema = new mongoose.Schema({
         required: true,
     },
     isbn: {
-        type: String,
-        max: 9,
+        type: Number,
         required: true,
-        unique: true
+        max: 9,
     },
     date_published: {
         type: Date,

@@ -1,7 +1,7 @@
-import Book from '../../../models/Book';
 import dbConnect from '../../../utils/dbConnect';
+import Book from '../../../models/Book';
 
-dbConnect();
+await dbConnect();
 
 export default async (req, res) => {
     switch (req.method) {
@@ -20,24 +20,34 @@ export default async (req, res) => {
     }
 }
 
-async function handleGetRequest(req, res) {}
+async function handleGetRequest(req, res) {
+    const { _id } = req.query
+    const book = await Book.findOne({ _id }) // find by Id
+    res.status(200).json(book)
+}
 
 async function handlePostRequest(req, res) {
     const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body
-    if (!title || !author || !number_of_pages || !isbn || !date_published || !genre || !summary || !mediaUrl) {
+
+    try {
+        if (!title || !author || !number_of_pages || !isbn || !date_published || !genre || !summary || !mediaUrl) {
         return res.status(422).send("Book missing one or more fields")
+        }
+        const book = await new Book({
+            title,
+            author,
+            number_of_pages,
+            isbn,
+            date_published,
+            genre,
+            summary,
+            mediaUrl
+        }).save()
+        res.status(201).json(book)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Server error creating book")
     }
-    const book = await new Book({
-        title,
-        author,
-        number_of_pages,
-        isbn,
-        date_published,
-        genre,
-        summary,
-        mediaUrl
-    }).save()
-    res.status(201).json(book)
 }
 
 async function handleDeleteRequest(req, res) {
