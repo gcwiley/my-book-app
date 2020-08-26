@@ -1,7 +1,7 @@
 import dbConnect from '../../../utils/dbConnect';
 import Book from '../../../models/Book';
 
-await dbConnect();
+dbConnect();
 
 export default async (req, res) => {
     switch (req.method) {
@@ -22,7 +22,7 @@ export default async (req, res) => {
 
 async function handleGetRequest(req, res) {
     const { _id } = req.query
-    const book = await Book.findById({ _id }) // find by Id
+    const book = await Book.findOne({ _id})
     res.status(200).json(book)
 }
 
@@ -52,6 +52,6 @@ async function handlePostRequest(req, res) {
 
 async function handleDeleteRequest(req, res) {
     const { _id } = req.query;
-    await Book.findByIdAndDelete({ _id })
+    await Book.findOneAndDelete({ _id })
     res.status(204).json({})
 }
