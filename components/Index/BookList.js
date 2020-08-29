@@ -47,7 +47,7 @@ export default function BookList({ books }) {
                         
                         <CardActions>
 
-                            <Link href="/[id]" as={`/${book._id}`} passHref>
+                            {/* <Link href="/[id]" as={`/${book._id}`} passHref>
                                 <Button
                                     size="small"
                                     color="primary"
@@ -56,7 +56,7 @@ export default function BookList({ books }) {
                                 >
                                 View
                                 </Button>
-                            </Link>
+                            </Link> */}
 
                         </CardActions> 
 

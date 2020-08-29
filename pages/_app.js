@@ -2,16 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-// Material UI Components
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container, CssBaseline, ThemeProvider } from '@material-ui/core'
 
 import theme from '../theme/theme';
-import { ThemeProvider } from '@material-ui/core/styles';
 
-// Layout Components
 import MenuAppBar from '../components/layout/MenuAppBar';
-import Copyright from '../components/layout/Copyright';
 import NavBar from '../components/layout/NavBar';
 
 export default function MyApp(props) {
@@ -19,7 +14,6 @@ export default function MyApp(props) {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
-    // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -34,13 +28,11 @@ export default function MyApp(props) {
       </Head>
       
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <MenuAppBar />
         <Container maxWidth="md">
           <NavBar />
             <Component {...pageProps} />
-          <Copyright />
         </Container>
       </ThemeProvider>
     </>
