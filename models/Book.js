@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const { String, Number } = mongoose.Schema.Types;
+const { String, Number, Date } = mongoose.Schema.Types;
 
 const BookSchema = new mongoose.Schema({
     title: {
@@ -16,11 +16,11 @@ const BookSchema = new mongoose.Schema({
         required: true,
     },
     isbn: {
-        type: String,
+        type: Number,
         required: true,
     },
     date_published: {
-        type: String,
+        type: Date,
         required: true
     },
     genre: {

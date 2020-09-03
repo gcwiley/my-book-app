@@ -103,7 +103,7 @@ export default function BookForm() {
                 severity="success"
                 elevation={2}
             >
-                This Book has been added to your library.
+                This book has been successfully added to your library.
             </Alert>
         </Snackbar>
 
@@ -150,9 +150,11 @@ export default function BookForm() {
                             label="Number of Pages"
                             variant="outlined"
                             size="small"
-                            type="text"
+                            type="number"
                             name="number_of_pages"
                             value={book.number_of_pages}
+
+                            autoComplete="off"
                             onChange={handleChange}
                         />
                     </Grid>
@@ -162,10 +164,12 @@ export default function BookForm() {
                             label="ISBN"
                             variant="outlined"
                             size="small"
-                            type="text"
+                            type="number"
                             helperText="Must be a 9 digit number"
                             name="isbn"
                             value={book.isbn}
+
+                            autoComplete="off"
                             onChange={handleChange}
                         />
                     </Grid>
@@ -174,7 +178,7 @@ export default function BookForm() {
                         <TextField
                             variant="outlined"
                             size="small"
-                            type="text"
+                            type="date"
                             name="date_published"
                             helperText="Date Published"
                             value={book.date_published}

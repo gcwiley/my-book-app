@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import catchErrors from '../../utils/catchErrors';
-
 import baseUrl from '../../utils/baseUrl';
 
 // MUI Components
 import { Avatar, Paper, Button, TextField, Grid, Typography, Container ,makeStyles } from '@material-ui/core';
-
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +38,7 @@ export default function SignUp() {
 
   const classes = useStyles();
 
-  // Manage State Here
+  // Manage Initial State Here
   const [ user, setUser ] = useState(INITIAL_USER);
   const [ disabled, setDisabled ] = useState(true);
   const [ loading, setLoading ] = useState(false);
@@ -82,7 +80,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
 
-          <Typography component="h1" variant="h5">
+          <Typography component="h3" variant="h5">
             Create Account
           </Typography>
 
@@ -142,6 +140,19 @@ export default function SignUp() {
               </Button>
           </form>
         </Paper>
+
+        <Grid container>
+
+          <Grid item xs>
+            <Link href="/signup">
+              <Typography variant="body2">
+                {"Already have an account? Sign In"}
+              </Typography>
+            </Link>
+          </Grid>
+
+        </Grid>
+
     </Container>
   );
 }

@@ -12,8 +12,6 @@
 
 8. Select text field for Book genre in book form
 
-CLOUDINARY_URL=cloudinary://446462832352242:NJdKK334Lg8GfLM6qv-5jXdWdPE@dnc06uisc
-
 
 
 

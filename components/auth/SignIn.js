@@ -5,8 +5,7 @@ import catchErrors from '../../utils/catchErrors';
 import baseUrl from '../../utils/baseUrl';
 
 // Material UI Components Go here
-import { Avatar, Paper, Button, TextField, Typography, Container, makeStyles} from '@material-ui/core';
-
+import { Avatar, Paper, Button, TextField, Typography, Container, Grid, makeStyles} from '@material-ui/core';
 import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +80,7 @@ export default function SignIn() {
           <LockedOutlinedIcon />
         </Avatar>
 
-        <Typography>
+        <Typography component="h3" variant="h5">
           Sign In
         </Typography>
 
@@ -132,6 +131,27 @@ export default function SignIn() {
 
         </form>
       </Paper>
+
+      <Grid container>
+
+        <Grid item xs>
+          <Link href="/forgot">
+            <Typography>
+              {"Forgot Password?"}
+            </Typography>
+          </Link>
+        </Grid>
+
+        <Grid item xs>
+          <Link href="/signup">
+            <Typography variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Typography>
+          </Link>
+        </Grid>
+
+      </Grid>
+
     </Container>
   );
 }
