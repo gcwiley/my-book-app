@@ -10,7 +10,7 @@ import BookActions from '../../components/Books/BookActions';
 // CSS Stlyes go here
 const useStyles = makeStyles((theme) => ({
     paper: {
-        padding: theme.spacing(4),
+        padding: theme.spacing(6),
     }
 })) 
 
@@ -19,7 +19,7 @@ export default function BookPage ({ book }) {
     const classes = useStyles();
 
     return (
-            <Paper className={classes.paper}>
+            <Paper variant="outlined" className={classes.paper}>
                 <BookDetails book={book} /> 
                 <BookActions book={book} />
             </Paper>

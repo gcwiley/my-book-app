@@ -12,13 +12,12 @@ const BookSchema = new mongoose.Schema({
         required: true
     },
     number_of_pages: {
-        type: Number,
+        type: String,
         required: true,
     },
     isbn: {
-        type: Number,
+        type: String,
         required: true,
-        max: 9,
     },
     date_published: {
         type: String,
@@ -36,9 +35,7 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-}, 
-    // gives us "createdAt" and "updatedAt" fields automatically
-    { timestamps: true }
+}
 )
 
 export default mongoose.models.Book || mongoose.model('Book', BookSchema);

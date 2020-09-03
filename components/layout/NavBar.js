@@ -1,14 +1,17 @@
-import React from "react";
 import Link from "next/link";
-// import Typography from "@material-ui/core/Typography";
+import Router, { useRouter } from 'next/router';
+import NProgress from 'nprogress';
+
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
+
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 import HomeIcon from '@material-ui/icons/Home';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import InfoIcon from '@material-ui/icons/Info';
-
-import { makeStyles } from '@material-ui/core/styles';
-
-// Add colors to different buttons
 
 // CSS Styles
 const useStyles = makeStyles((theme) => ({
@@ -27,9 +30,13 @@ export default function NavBar() {
 
     const classes = useStyles();
 
+    const router = useRouter();
+    
+    const user = false;
+
     return (
         <>
-            <Link href="/index" passHref>
+            <Link href="/" passHref>
                 <Button 
                     variant="outlined" 
                     color="primary"
@@ -62,7 +69,31 @@ export default function NavBar() {
                     startIcon={<InfoIcon />}
                 >
                 About
-            </Button>
+                </Button>
+            </Link>
+
+            <Link href="/signin" passHref>
+                <Button 
+                    variant="outlined" 
+                    color="primary"
+                    component="a"
+                    className={classes.button}
+                    startIcon={<InfoIcon />}
+                >
+                Sign In
+                </Button>
+            </Link>
+
+            <Link href="/signup" passHref>
+                <Button 
+                    variant="outlined" 
+                    color="primary"
+                    component="a"
+                    className={classes.button}
+                    startIcon={<InfoIcon />}
+                >
+                Sign Up
+                </Button>
             </Link>
         </>
     );

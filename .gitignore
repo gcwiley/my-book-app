@@ -16,6 +16,9 @@ next.config.*
 # production
 /build
 
+# public folder
+/public
+
 # misc
 .DS_Store
 

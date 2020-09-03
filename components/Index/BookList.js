@@ -1,20 +1,18 @@
 import Link from 'next/link';
 
-import { Card, CardActions, CardContent, Button, Typography, Grid } from '@material-ui/core';
+import { Grid, Typography, Card, makeStyles} from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core';
-
-// CSS Styles
 const useStyles = makeStyles((theme) => ({
-    cardGrid: {
-        paddingTop: theme.spacing(8),
-        paddingBottom: theme.spacing(8),
+    book_card: {
+        width: theme.spacing(23),
+        height: theme.spacing(31),
+        marginTop: theme.spacing(4),
+        marginRight: theme.spacing(3)
     },
-    card: {
-        marginTop: theme.spacing(3),
-        marginLeft: theme.spacing(2),
-        marginBottom: theme.spacing(3)
-
+    book_card_image: {
+        width: theme.spacing(23),
+        height: theme.spacing(31),
+        position: 'center'
     }
 }));
 
@@ -28,44 +26,18 @@ export default function BookList({ books }) {
                 My Books
             </Typography>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={0} >
 
                 {books.map((book) => (
-                    <Grid item component={Card} key={book._id} className={classes.card} square>
-
-                        <CardContent>
-
-                            <Typography color="primary" variant="h5">
-                                {book.title}
-                            </Typography>
-
-                            <Typography color="secondary">
-                                {book.author}
-                            </Typography>
-
-                        </CardContent>
-                        
-                        <CardActions>
-
-                            {/* <Link href="/[id]" as={`/${book._id}`} passHref>
-                                <Button
-                                    size="small"
-                                    color="primary"
-                                    component="a"
-                                    variant="outlined"
-                                >
-                                View
-                                </Button>
-                            </Link> */}
-
-                        </CardActions> 
-
+                    <Grid item component={Card} className={classes.book_card} elevation={4} key={book._id} >
+                        <Link href="/[id]" as={`/${book._id}`} passHref>
+                            <img src={book.mediaUrl} className={classes.book_card_image} />
+                        </Link>
                     </Grid>
                 ))}
 
             </Grid>
-            
         </>
-    )
+    );
 }
 

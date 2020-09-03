@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import baseUrl from '../../utils/baseUrl';
-// import catchErrors from '../../utils/catchErrors';
+import catchErrors from '../../utils/catchErrors';
 
 import { Typography, TextField, Grid, Paper, Button, Backdrop, CircularProgress, Snackbar, makeStyles } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -36,7 +36,7 @@ export default function BookForm() {
     const [ success, setSuccess ] = useState(false);
     const [ loading, setLoading ] = useState(false);
     const [ disabled, setDisabled ] = useState(true);
-    // const [ error, setError ] = useState(true);
+    const [ error, setError ] = useState(true);
 
     // useEffect goes here
     useEffect(() => {
@@ -150,7 +150,7 @@ export default function BookForm() {
                             label="Number of Pages"
                             variant="outlined"
                             size="small"
-                            type="number"
+                            type="text"
                             name="number_of_pages"
                             value={book.number_of_pages}
                             onChange={handleChange}
@@ -162,7 +162,7 @@ export default function BookForm() {
                             label="ISBN"
                             variant="outlined"
                             size="small"
-                            type="number"
+                            type="text"
                             helperText="Must be a 9 digit number"
                             name="isbn"
                             value={book.isbn}
@@ -174,7 +174,7 @@ export default function BookForm() {
                         <TextField
                             variant="outlined"
                             size="small"
-                            type="date"
+                            type="text"
                             name="date_published"
                             helperText="Date Published"
                             value={book.date_published}
