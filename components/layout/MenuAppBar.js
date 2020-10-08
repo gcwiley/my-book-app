@@ -1,38 +1,49 @@
-import React from 'react';
+import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
+import NProgress from 'nprogress';
 
 // MUI Components
-import { Container, AppBar, Toolbar, Typography, IconButton, MenuItem, Menu } from '@material-ui/core';
+import { Container, AppBar, Toolbar, Typography, IconButton, Button, makeStyles } from '@material-ui/core';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
+// MUI Icons
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { makeStyles } from '@material-ui/core/styles';
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
   },
+  navButton: {
+    marginLeft: theme.spacing(1),
+    color: theme.palette.action
+  },
 }));
 
 export default function MenuAppBar() {
+
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const router = useRouter();
+  
+  const user = true;
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // this is a helper function
+  function isActive(route) {
+    return route === router.pathname
+  }
 
   return (
     <div className={classes.root}>
@@ -47,41 +58,84 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title}>
             My Book Library
           </Typography>
+
+          <Link href="/">
+            <Button
+              variant="outlined"
+              color="default"
+              size="small"
+              startIcon={<HomeIcon />}
+              className={classes.navButton}
+            >
+              Home
+            </Button>
+          </Link>
+
+          {user && <Link href="/create">
+            <Button
+              variant="outlined"
+              color="default"
+              size="small"
+              startIcon={<LocalLibraryIcon />}
+              className={classes.navButton}
+            >
+              New Book
+            </Button>
+          </Link>}
+
+          {user ? 
+
+          (<>
+            <Link href="/account">
+              <Button
+                variant="outlined"
+                color="default"
+                size="small"
+                startIcon={<InfoIcon />}
+                className={classes.navButton}
+              >
+                My Account
+              </Button>
+            </Link>
+
+            <Button
+                variant="outlined"
+                color="default"
+                size="small"
+                startIcon={<ExitToAppIcon />}
+                className={classes.navButton}
+              >
+                Logout
+            </Button>
+          </>)
+
+          :
           
-          {auth && (
-            <div>
-
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
+          (<>
+            <Link href="/signin">
+              <Button
+                variant="outlined"
+                color="default"
+                size="small"
+                startIcon={<LockOpenIcon />}
+                className={classes.navButton}
               >
-                <AccountCircle />
-              </IconButton>
+                Sign In
+              </Button>
+            </Link>
 
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
+            <Link href="/signup">
+              <Button
+                variant="outlined"
+                color="default"
+                size="small"
+                className={classes.navButton}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-              
-            </div>
-          )}
+                Sign Up
+              </Button>
+            </Link>
+          </>)}
+
         </Toolbar>
       </Container>
       </AppBar>

@@ -88,7 +88,6 @@ export default function SignIn() {
           onSubmit={handleSubmit}
           className={classes.form}
         >
-
             <TextField
               variant="outlined"
               size="small"
@@ -98,7 +97,6 @@ export default function SignIn() {
               margin="dense"
               name="email"
               value={user.email}
-
               autoFocus
               autoComplete="off"
               onChange={handleChange}
@@ -113,7 +111,6 @@ export default function SignIn() {
               margin="dense"
               name="password"
               value={user.password}
-
               autoComplete="off"
               onChange={handleChange}
             />

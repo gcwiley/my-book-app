@@ -5,7 +5,14 @@ import { useRouter } from 'next/router'
 
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
-export default function BookActions({ _id }) {
+// MUI Icons
+import DeleteIcon from '@material-ui/icons/Delete';
+
+export default function BookActions({ book }) {
+
+    const { _id } = book;
+
+    console.log(_id)
 
     const [ modal, setModal ] = React.useState(false)
 
@@ -13,16 +20,18 @@ export default function BookActions({ _id }) {
 
     async function handleDelete() {
         const url = `${baseUrl}/api/books`
-        const payload = { params: { _id }}
-        await axios.delete(url, payload)
+        const payload = { _id }
+        await axios.delete(url, { params: { payload }} )
         router.push('/');
     }
 
     return (
         <>
             <Button
-                variant="outlined"
-                color="primary"
+                variant="contained"
+                color="secondary"
+                size="small"
+                startIcon={<DeleteIcon />}
                 onClick={() => setModal(true)}
             >
                 Delete Book
@@ -44,6 +53,8 @@ export default function BookActions({ _id }) {
                 <DialogActions>
 
                     <Button
+                        variant="outlined"
+                        size="small"
                         onClick={() => setModal(false) }
                     >
                         Cancel
@@ -51,7 +62,10 @@ export default function BookActions({ _id }) {
 
                     <Button
                         color="secondary"
-                        variant="outlined"
+                        variant="contained"
+                        size="small"
+                        startIcon={<DeleteIcon />}
+                        disableElevation
                         onClick={handleDelete}
                     >
                         Delete

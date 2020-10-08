@@ -20,6 +20,7 @@ export default async (req, res) => {
     }
 }
 
+// TRY CATCH GOES HERE
 async function handleGetRequest(req, res) {
     const { _id } = req.query
     const book = await Book.findOne({ _id})
@@ -28,7 +29,6 @@ async function handleGetRequest(req, res) {
 
 async function handlePostRequest(req, res) {
     try {
-        console.log(req.body)
         const {title, author, number_of_pages, isbn, date_published, genre, summary, mediaUrl } = req.body
         if (!title || !author || !number_of_pages || !isbn || !date_published || !genre || !summary || !mediaUrl) {
         return res.status(422).send("Book missing one or more fields")
@@ -50,8 +50,10 @@ async function handlePostRequest(req, res) {
     }
 }
 
+// TRY CATCH GOES HERE
 async function handleDeleteRequest(req, res) {
     const { _id } = req.query;
+    console.log("REQUEST", _id)
     await Book.findOneAndDelete({ _id })
     res.status(204).json({})
 }

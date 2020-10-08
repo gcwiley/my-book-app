@@ -4,14 +4,14 @@ import { Grid, Typography, Card, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     book_card: {
-        width: theme.spacing(23),
-        height: theme.spacing(31),
+        width: theme.spacing(20),
+        height: theme.spacing(30),
         marginTop: theme.spacing(4),
         marginRight: theme.spacing(3)
     },
     book_card_image: {
-        width: theme.spacing(23),
-        height: theme.spacing(31),
+        width: theme.spacing(20),
+        height: theme.spacing(30),
         position: 'center'
     }
 }));

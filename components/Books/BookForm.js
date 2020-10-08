@@ -178,7 +178,7 @@ export default function BookForm() {
                         <TextField
                             variant="outlined"
                             size="small"
-                            type="date"
+                            type="text"
                             name="date_published"
                             helperText="Date Published"
                             value={book.date_published}

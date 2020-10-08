@@ -7,7 +7,6 @@ import { Container, CssBaseline, ThemeProvider } from '@material-ui/core'
 import theme from '../theme/theme';
 
 import MenuAppBar from '../components/layout/MenuAppBar';
-import NavBar from '../components/layout/NavBar';
 
 export default function MyApp(props) {
   
@@ -31,7 +30,6 @@ export default function MyApp(props) {
         <CssBaseline />
         <MenuAppBar />
         <Container maxWidth="md">
-          <NavBar />
             <Component {...pageProps} />
         </Container>
       </ThemeProvider>

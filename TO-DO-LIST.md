@@ -1,16 +1,10 @@
-1. Set up delete Book dialog alert
+1. Pass _id to Book Actions
 
-2. Add Material UI styles to book cards
+2. Add App Status Messages to Bottom
 
-3. Add MD Container to Main Menu Bar
+3. Create Account Page
 
-3. Work on fixing Add Book Form
-
-4. test delete dialog model in testing folder
-
-5. Add About Information to the About Page - create change Log JSON file
-
-8. Select text field for Book genre in book form
+4. Add Change Log
 
 
 
