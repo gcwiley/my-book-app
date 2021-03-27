@@ -6,17 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gcwiley/my-book-library.git"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "Gregory Wiley",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gcwiley/my-book-library/issues"
-  },
-  "homepage": "https://github.com/gcwiley/my-book-library#readme",
   "dependencies": {
     "mongodb": "^3.6.5"
   }
