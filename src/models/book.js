@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 // Define the Book model
-
 const Book = mongoose.model('Book', {
     title: {
         type: String,
@@ -13,12 +12,12 @@ const Book = mongoose.model('Book', {
         required: true,
         trim: true
     },
-    pages: {
+    pageCount: {
         type: Number,
         default: 0,
         validate(value) {
             if(value < 0) {
-                throw new Error('pages must be a positive number')
+                throw new Error('Page count must be a positive number')
             }
         }
     }
