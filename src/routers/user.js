@@ -3,15 +3,31 @@ const User = require('../models/user')
 // define a new router
 const router = new express.Router()
 
-// Route to create a new user
+// Route to create a new user - SIGN UP USER
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
 
     try {
         await user.save()
-        res.status(201).send(user)
+        // generate a token for the saved users
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
     } catch (error) {
         res.status(400).send(error)
+    }
+})
+
+// Route that allows users to log in - LOG IN USER
+// login request generates and stores a authenitcation token and send it back to client
+router.post('/users/login', async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        // function that returns token and is sent to the user
+        const token = await user.generateAuthToken()
+        // send back object with two properties - user and token
+        res.send({ user, token })
+    } catch (error) {
+        res.status(400).send()
     }
 })
 
@@ -42,7 +58,7 @@ router.get('/users/:id', async (req, res) => {
     }
 })
 
-// Route handler to update a individual user
+// Route handler to update a individual user - UPDATE USER
 router.patch('/users/:id', async (req, res) => {
     // Error handling - making sure the user is using the operation correctly
     const updates = Object.keys(req.body)
@@ -56,8 +72,10 @@ router.patch('/users/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
 
+        // iterate over updates that are being applied
         updates.forEach((update) => user[update] = req.body[update])
 
+        // save to datebase
         await user.save()
 
         // no user to update with that ID

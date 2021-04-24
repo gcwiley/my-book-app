@@ -46,7 +46,7 @@ router.get('/books/:id', async (req, res) => {
 router.patch('/books/:id', async (req, res) => {
     // Error handling - make sure the user is running the operation correctly
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['UPDATE', 'UPDATE']
+    const allowedUpdates = ['title', 'author', 'pageCount']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
@@ -54,7 +54,14 @@ router.patch('/books/:id', async (req, res) => {
     }
 
     try {
-        const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        // find book by ID
+        const book = await Book.findById(req.params.id)
+
+        // iterate over updates that are being applied - use "forEach" to loop over updates
+        updates.forEach((update) => book[update] = req.body[update])
+
+        // save book to database
+        await book.save()
 
         // if no book to update with that ID
         if (!book) {

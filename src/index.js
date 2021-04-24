@@ -18,3 +18,17 @@ app.use(bookRouter)
 app.listen(port, () => {
     console.log('Server is running on port ' + port)
 })
+
+const jwt = require('jsonwebtoken')
+
+const myFunction = async () => {
+    // sign method takes two arguments - first is object (data that is embedded in token), second is string
+   const token = jwt.sign({ _id: 'abc123' }, 'thisismynewcourse', { expiresIn: '7 days'})
+   console.log(token)
+
+   // "verify" takes two arguments - first is token you want to verify and sencond is the secret to use 
+   const data = jwt.verify(token, 'thisismynewcourse')
+   console.log(data)
+}
+
+myFunction()
