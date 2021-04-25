@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const auth = require('../middleware/auth')
 // define a new router
 const router = new express.Router()
 
@@ -31,35 +32,45 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-// Route handler for fetching all users
-router.get('/users', async (req, res) => {
+// Route that allows user to log out - LOG OUT
+router.post('/users/logout', auth, async (req, res) => {
     try {
-        const users = await User.find({})
-        res.send(users)
+        // removing a given item from the tokens array - using array filter method
+        // set tokens array to filtered version of itself
+        req.user.tokens = req.user.tokens.filter((token) => {
+            // return true when the token that we are currently looking at is not the one used for authenication
+            return token.token !== req.token
+        })
+        // save to database
+        await req.user.save()
+
+        res.send()
     } catch (error) {
         res.status(500).send()
     }
 })
 
-// Route handler to fetch individual user by ID
-router.get('/users/:id', async (req, res) => {
-    const _id = req.params._id
-
+// Route that allows user to log out of all sessions - LOG OUT ALL SESSIONS
+router.post('/users/logoutAll', auth, async (req, res) => {
     try {
-        const user = await User.findById(_id)
-
-        if (!user) {
-            return res.status(404).send()
-        }
-
-        res.send(user)
+        // wipe the tokens array creates an empty array
+        req.user.tokens = []
+        // save to database
+        await req.user.save()
+        res.send()
     } catch (error) {
         res.status(500).send()
     }
 })
 
-// Route handler to update a individual user - UPDATE USER
-router.patch('/users/:id', async (req, res) => {
+// Route handler that user to get profile when they are authenticated - GET USER PROFILE
+router.get('/users/me', auth, async (req, res) => {
+    // send back user profile
+    res.send(req.user)
+})
+
+// Route handler to update a individual user - UPDATE USER PROFILE
+router.patch('/users/me', auth, async (req, res) => {
     // Error handling - making sure the user is using the operation correctly
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password']
@@ -70,37 +81,27 @@ router.patch('/users/:id', async (req, res) => {
     }
 
     try {
-        const user = await User.findById(req.params.id)
-
         // iterate over updates that are being applied
-        updates.forEach((update) => user[update] = req.body[update])
+        updates.forEach((update) => req.user[update] = req.body[update])
 
         // save to datebase
-        await user.save()
+        await req.user.save()
 
-        // no user to update with that ID
-        if (!user) {
-            return res.status(404).send()
-        }
-
-        // send updated user back
-        res.send(user)
+        // send updated user back to client
+        res.send(req.user)
     } catch (error) {
         // if something goes wrong - like a validation issue
         res.status(400).send(error)
     }
 })
 
-// Route handler to delete a user by ID
-router.delete('/users/:id', async (req, res) => {
+// Route handler to allow logged in user to delete own profile - DELETE USER PROFILE
+router.delete('/users/me', auth, async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id)
+        // remove user who is authenticated
+        await req.user.remove()
 
-        if (!user) {
-            return res.status(404).send()
-        }
-
-        res.send(user)
+        res.send(req.user)
     } catch (error) {
         res.status(500).send()
     }

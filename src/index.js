@@ -19,16 +19,19 @@ app.listen(port, () => {
     console.log('Server is running on port ' + port)
 })
 
-const jwt = require('jsonwebtoken')
+// load in the Book Model
+const Book = require('./models/book')
+const User = require('./models/user')
 
-const myFunction = async () => {
-    // sign method takes two arguments - first is object (data that is embedded in token), second is string
-   const token = jwt.sign({ _id: 'abc123' }, 'thisismynewcourse', { expiresIn: '7 days'})
-   console.log(token)
+const main = async () => {
+    // find book by ID
+    // const book = await Book.findById('60857a82e61d6e1387d7d74d')
+    // await book.populate('owner').execPopulate()
+    // console.log(book.owner)
 
-   // "verify" takes two arguments - first is token you want to verify and sencond is the secret to use 
-   const data = jwt.verify(token, 'thisismynewcourse')
-   console.log(data)
+    const user = await User.findById('60857929453acc128546ada7')
+    await user.populate('books').execPopulate()
+    console.log(user.books)
 }
 
-myFunction()
+main()

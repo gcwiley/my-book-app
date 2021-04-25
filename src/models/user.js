@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const Book = require('./book')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -41,8 +42,28 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+// set up vitural property - a relationship between two entities
+userSchema.virtual('books', {
+    ref: 'Book',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+
+userSchema.methods.toJSON = function () {
+    const user = this
+    // raw object with our user data attached - toObject provide raw profile data
+    const userObject = user.toObject()
+
+    // mantipulate userObject to change what we expose
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+}
+
 // methods are accessible on the instances - called instance methods
-// generate and return a token
+// generates and return a token
 userSchema.methods.generateAuthToken = async function () {
     const user = this
 
@@ -81,7 +102,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-// hash the plain text password before saving
+// hashes the plain text password before saving
 // use method on userSchema to set up Middleware - this must be a standard function b/c arrow functions dont bind "this"
 userSchema.pre('save', async function (next) {
     // "this" = document being saved
@@ -95,6 +116,17 @@ userSchema.pre('save', async function (next) {
     
     next()
 })
+
+// Delete user's books when user deletes account
+userSchema.pre('remove', async function (next) {
+    const user = this
+
+    // delete multiple books using the owner field
+    await Book.deleteMany({ owner: user._id })
+
+    next()
+})
+
 
 const User = mongoose.model('User', userSchema)
 

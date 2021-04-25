@@ -19,6 +19,17 @@ const bookSchema = new mongoose.Schema({
                 throw new Error('Page count must be a positive number')
             }
         }
+    },
+    favorite: {
+        type: Boolean,
+        default: false
+    },
+    owner: {
+        // data stored in owner is going to be an ObjectID
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        // ref creates reference between this field and another model
+        ref: 'User'
     }
 })
 
