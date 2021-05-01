@@ -22,10 +22,34 @@ router.post('/books', auth, async (req, res) => {
 })
 
 // Route handler for fetching all books - GET ALL BOOKS
+// GET /books?favorite=true
+// GET /books?limit=10&skip=20
+// GET /books?sortBy=createAt:desc
 router.get('/books', auth, async (req, res) => {
+    // create an object stored in a variable called "match"
+    const match = {}
+    const sort = {}
+
+    if (req.query.favorite) {
+        match.favorite = req.query.favorite === 'true'
+    }
+
+    if (req.query.sortBy) {
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    }
+
     try {
-        // const books = await Book.find({ owner: req.user._id })
-        await req.user.populate('books').execPopulate()
+        // const books = await Book.find({ owner: req.user._id }) // alt way of finding books
+        await req.user.populate({
+            path: 'books',
+            match: match,
+            options: {
+                limit: parseInt(req.query.limit), // parseInt() converts string to integer
+                skip: parseInt(req.query.skip),
+                sort: sort
+            }
+        }).execPopulate()
         res.send(req.user.books)
     } catch (error) {
         res.status(500).send()

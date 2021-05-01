@@ -65,7 +65,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 
 // Route handler that user to get profile when they are authenticated - GET USER PROFILE
 router.get('/users/me', auth, async (req, res) => {
-    // send back user profile
+    // sends back user profile
     res.send(req.user)
 })
 

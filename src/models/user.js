@@ -40,6 +40,8 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }]
+}, {
+    timestamps: true
 })
 
 // set up vitural property - a relationship between two entities
@@ -124,6 +126,7 @@ userSchema.pre('remove', async function (next) {
     // delete multiple books using the owner field
     await Book.deleteMany({ owner: user._id })
 
+    // next() lets mongoose know when we are done running our code
     next()
 })
 

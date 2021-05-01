@@ -31,6 +31,8 @@ const bookSchema = new mongoose.Schema({
         // ref creates reference between this field and another model
         ref: 'User'
     }
+}, {
+    timestamps: true
 })
 
 const Book = mongoose.model('Book', bookSchema)
